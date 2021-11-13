@@ -3,12 +3,12 @@ package io.github.ogretest.composefest2021.week0201layouts
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -21,6 +21,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import io.github.ogretest.composefest2021.week0201layouts.ui.theme.Week0201layoutsTheme
 
 class MainActivity : ComponentActivity() {
@@ -135,7 +137,8 @@ fun LayoutsCodeLab() {
         BodyContent(
             Modifier
                 .padding(innerPadding)
-                .padding(8.dp))
+                .padding(8.dp)
+        )
     }
 }
 
@@ -152,5 +155,25 @@ private fun BodyContent(modifier: Modifier = Modifier) {
 fun LayoutsCodeLabPreview() {
     Week0201layoutsTheme {
         LayoutsCodeLab()
+    }
+}
+
+@Composable
+fun SimpleList() {
+    val scrollState = rememberLazyListState()
+    LazyColumn(state = scrollState) {
+        items(100) {
+            Text("Item #$it", color = MaterialTheme.colors.primary)
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SimpleListPreview() {
+    Week0201layoutsTheme {
+        Surface(color = MaterialTheme.colors.surface) {
+            SimpleList()
+        }
     }
 }
