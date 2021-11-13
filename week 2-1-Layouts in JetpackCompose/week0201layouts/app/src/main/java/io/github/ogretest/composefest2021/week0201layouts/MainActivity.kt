@@ -12,8 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -86,5 +85,31 @@ fun PhotographerCard(modifier: Modifier = Modifier) {
 fun PhotographerCardPreview() {
     Week0201layoutsTheme {
         PhotographerCard()
+    }
+}
+
+@Composable
+fun C4SlotAPIsButton(
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    content: @Composable () -> Unit
+) {
+    Surface(
+        modifier = modifier
+            .clickable(enabled = onClick != null) { onClick?.invoke() },
+        content = content
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun C4SlotAPIsPreview() {
+    var count by remember { mutableStateOf(0) }
+    Week0201layoutsTheme {
+        C4SlotAPIsButton(
+            onClick = { count += 1 }
+        ) {
+            Text("C4SlotAPIsButton $count")
+        }
     }
 }
