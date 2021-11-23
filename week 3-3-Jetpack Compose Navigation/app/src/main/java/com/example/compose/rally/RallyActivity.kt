@@ -19,6 +19,7 @@ package com.example.compose.rally
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -75,8 +76,9 @@ fun RallyApp() {
     }
 }
 
+@VisibleForTesting
 @Composable
-private fun RallyNavHost(
+fun RallyNavHost(
     navController: NavHostController,
     modifier: Modifier = Modifier
 ) {
@@ -87,7 +89,10 @@ private fun RallyNavHost(
         modifier = modifier
     ) {
         composable(RallyScreen.Overview.name) {
-            OverviewBody { name ->
+            OverviewBody(
+                onClickSeeAllAccounts = { navController.navigate(RallyScreen.Accounts.name) },
+                onClickSeeAllBills = { navController.navigate(RallyScreen.Bills.name) },
+            ) { name ->
                 navigateToSingleAccount(navController, name)
             }
         }
