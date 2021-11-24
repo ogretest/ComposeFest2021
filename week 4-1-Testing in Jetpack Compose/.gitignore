@@ -1,0 +1,12 @@
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+!/etc/firebaseremoteconfig/config*.jar
+/etc/firebaseremoteconfig/*.json
+/release
